@@ -1,38 +1,180 @@
-.App {
+:root {
+  --background-color: #F7EDE2;  /* Sanftes Cremeweiß */
+  --text-color: #84A59D;        /* Salbeigrün für Texte */
+  --box-color: #F5CAC3;         /* Zartrosa für Form-Hintergrund */
+  --button-color: #F28482;      /* Korallenrot für Buttons */
+  --hover-color: #F6BD60;       /* Hellgelb für Hover */
+  --error-color: #F28482;       /* Fehlerfarbe */
+  --input-bg-color: #F7EDE2;    /* Hintergrund der Eingabefelder */
+  --disabled-button: #D9BBA9;   /* Deaktivierter Button */
+  --disabled-text: #403C01;     /* Textfarbe für deaktivierten Button */
+  --carousel-bg: #F5CAC3;       /* Hintergrund für Karussell */
+  --card-bg: #F7EDE2;           /* Hintergrund der Dessert-Karten */
+  --card-text: #403C01;         /* Textfarbe für Karten */
+  --scrollbar-track: #F7EDE2;   /* Scrollbar-Hintergrund */
+  --scrollbar-thumb: #F28482;   /* Scrollbar-Farbe */
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+}
+
+/* 🍰 DESSERT-KARUSSELL DESIGN */
+.dessert-section {
+  text-align: center;
+  padding: 40px;
+  background-color: var(--carousel-bg);
+  color: var(--text-color);
+}
+
+.dessert-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Karussell-Container */
+.dessert-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Dessert-Karten */
+.dessert-card {
+  flex: 0 0 auto;
+  width: 250px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dessert-card:hover {
+  transform: scale(1.05);
+}
+
+.dessert-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.dessert-card p {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: var(--card-text);
+}
+
+.dessert-card strong {
+  color: var(--hover-color);
+}
+
+/* Scrollbar für das Karussell */
+.dessert-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.dessert-carousel::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.dessert-carousel::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+/* 📜 REGISTRIERUNGS-FORMULAR */
+.registrierungs-formular {
+  width: 50%;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: var(--box-color); /* Weiches Zartrosa */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.registrierungs-formular h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+input, select {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--text-color);
+  background: var(--input-bg-color);
+  color: var(--text-color);
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--hover-color);
+}
+
+button {
+  background-color: var(--button-color);
   color: white;
+  padding: 12px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: var(--hover-color);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button:disabled {
+  background-color: var(--disabled-button);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 1rem;
+  margin-top: -10px;
+}
+
+/* 📱 RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .registrierungs-formular {
+    width: 90%;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .dessert-card {
+    width: 200px;
+    padding: 10px;
   }
 }
