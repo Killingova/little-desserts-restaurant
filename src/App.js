@@ -6,6 +6,8 @@ import DessertsList from "./DessertsList";
 import dessertsData from "./dessertsData";
 import Reservierungsformular from "./Reservierungsformular";
 import Registrierungsformular from "./Registrierungsformular";
+import MagicMouseTrail from "./MagicMouseTrail";
+
 import "./App.css";
 
 
@@ -14,6 +16,7 @@ function App() {
 
   return (
     <div className={`app ${theme}`}>
+      <MagicMouseTrail />
       {/* Header & Navigation */}
       <header className="header">
         <h1>Little Desserts Restaurant</h1>
@@ -64,6 +67,7 @@ function App() {
 
         {/* Registrierung */}
         <section className="section">
+        <h2>Registrierung</h2>
           <Registrierungsformular />
         </section>
       </main>

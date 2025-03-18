@@ -1,20 +1,22 @@
-// Reservierungsformular.js
 import React, { useState } from "react";
+import { RadioGroup, RadioOption } from "./RadioGroup"; // Import der neuen Komponente
 
 export default function Reservierungsformular() {
-  // State als Objekt, z.B. (name, email, datum)
+  // State für Reservierung inklusive Empfehlungsquelle
   const [reservation, setReservation] = useState({
     name: "",
     email: "",
-    datum: ""
+    datum: "",
+    empfehlung: "social_media", // Standardwert
   });
 
-  // Funktion, um zu prüfen, ob alles ausgefüllt ist
+  // Formular-Validierung
   const isFormValid = () => {
     return (
       reservation.name.trim() !== "" &&
       reservation.email.includes("@") &&
-      reservation.datum !== ""
+      reservation.datum !== "" &&
+      reservation.empfehlung !== ""
     );
   };
 
@@ -22,9 +24,10 @@ export default function Reservierungsformular() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      alert(`Reservierung für ${reservation.name} am ${reservation.datum} erfolgreich!`);
-      // Form zurücksetzen
-      setReservation({ name: "", email: "", datum: "" });
+      alert(
+        `Reservierung für ${reservation.name} am ${reservation.datum} erfolgreich!\nEmpfehlung: ${reservation.empfehlung}`
+      );
+      setReservation({ name: "", email: "", datum: "", empfehlung: "social_media" });
     }
   };
 
@@ -33,7 +36,7 @@ export default function Reservierungsformular() {
     const { name, value } = e.target;
     setReservation((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -68,7 +71,19 @@ export default function Reservierungsformular() {
         required
       />
 
-      <button type="submit">
+      {/* Neue Empfehlungs-Auswahl */}
+      <label>Wie hast du von uns erfahren?</label>
+      <RadioGroup
+        selected={reservation.empfehlung}
+        onChange={(value) => setReservation((prev) => ({ ...prev, empfehlung: value }))}
+      >
+        <RadioOption value="social_media">Social Media</RadioOption>
+        <RadioOption value="friends">Freunde</RadioOption>
+        <RadioOption value="advertising">Werbung</RadioOption>
+        <RadioOption value="other">Andere Quelle</RadioOption>
+      </RadioGroup>
+
+      <button type="submit" disabled={!isFormValid()}>
         Jetzt reservieren
       </button>
     </form>

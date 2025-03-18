@@ -223,6 +223,23 @@ section#reservieren button[type="submit"]:hover {
   background-color: var(--hover-color);
   color: var(--disabled-text);
 }
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.radio-option {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input[type="radio"] {
+  transform: scale(1.2);
+}
 
 /* Registrierungsformular */
 .registrierungs-formular {
