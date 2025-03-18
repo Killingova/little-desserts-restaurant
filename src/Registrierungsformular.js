@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Registrierungsformular.css";
 
 // ✅ E-Mail-Validierungshilfe
 const validateEmail = (email) => {

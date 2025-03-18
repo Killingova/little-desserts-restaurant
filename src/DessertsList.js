@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./DessertsList.css";
 
 const DessertsList = ({ data }) => {
   const [chakraFilter, setChakraFilter] = useState("Alle");
@@ -24,9 +23,9 @@ const DessertsList = ({ data }) => {
       {/* 🎯 Dropdown-Menüs für Filter & Sortierung */}
       <div className="filter-container">
         <select value={chakraFilter} onChange={(e) => setChakraFilter(e.target.value)}>
-          <option value="Alle">🔮 Chakra (Alle)</option>
+          <option value="Alle">🔮 Für (Alle)</option>
           <option value="Wurzel">❤️ Wurzelchakra</option>
-          <option value="Sakral">🧡 Sakralchakra</option>
+          <option value="Sakral">🧡 Sakralchakra</option> 
           <option value="Solarplexus">💛 Solarplexus</option>
           <option value="Herz">💚 Herzchakra</option>
           <option value="Hals">💙 Halschakra</option>
@@ -35,7 +34,7 @@ const DessertsList = ({ data }) => {
         </select>
 
         <select value={saisonFilter} onChange={(e) => setSaisonFilter(e.target.value)}>
-          <option value="Alle">🌍 Saison (Alle)</option>
+          <option value="Alle">🌍 Im (Alle)</option>
           <option value="Frühling">🌸 Frühling</option>
           <option value="Sommer">☀️ Sommer</option>
           <option value="Herbst">🍂 Herbst</option>
@@ -56,8 +55,8 @@ const DessertsList = ({ data }) => {
             <div key={index} className="dessert-card">
               <h3>{dessert.name}</h3>
               <p><strong>Kalorien:</strong> {dessert.kalorien} kcal</p>
-              <p><strong>Chakra:</strong> {dessert.chakra}</p>
-              <p><strong>Saison:</strong> {dessert.saison}</p>
+              <p><strong>Für:</strong> {dessert.chakra}</p>
+              <p><strong>Im:</strong> {dessert.saison}</p>
             </div>
           ))
         ) : (

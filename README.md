@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Little Desserts Restaurant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dies ist ein kleines Demoprojekt, das mit [Create React App](https://github.com/facebook/create-react-app) erstellt wurde.  
+Ziel der Anwendung ist es, eine fiktive Dessert-Restaurant-Website zu präsentieren und dabei folgende Features zu demonstrieren:
 
-## Available Scripts
+- **Hell-/Dunkelmodus** via React Context  
+- **Dessertliste** mit Filter- und Sortierfunktionen  
+- **Reservierungsformular**  
+- **Registrierungsformular** mit Validierung  
+- **Reaktive UI** mittels React-Komponenten
 
-In the project directory, you can run:
+## Verzeichnisstruktur
 
-### `npm start`
+Ein Auszug der wichtigsten Dateien und Ordner:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+.
+├── public/                  # Public-Assets (z.B. index.html)
+├── src/
+│   ├── App.js               # Hauptkomponente der App
+│   ├── App.css              # Zentrales CSS
+│   ├── ThemeContext.js      # Kontext für Hell-/Dunkelmodus
+│   ├── Switch.js            # Umschalt-Button/Schalter für das Theme
+│   ├── DessertsList.js      # Liste und Filter für Desserts
+│   ├── dessertsData.js      # Musterhafte Datensammlung zu Desserts
+│   ├── Registrierungsformular.js   # Registrierungsformular mit Validierung
+│   └── index.js             # Einstiegspunkt, rendert die App
+├── package.json
+└── README.md
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features im Detail
 
-### `npm test`
+### 1. **Hell-/Dunkelmodus**  
+Über `ThemeContext.js` wird ein globaler Zustand verwaltet, der entweder `"light"` oder `"dark"` sein kann.  
+- `ThemeProvider` umschließt in `index.js` die gesamte App.  
+- Mit `useTheme()` greifen Komponenten auf das aktuelle Thema und die Funktion `toggleTheme` zu.  
+- In `Switch.js` (oder in einem Button in `App.js`) kann man den Modus umschalten.  
+- Das Styling reagiert in `App.css` auf `.app.light` bzw. `.app.dark`.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. **Dessertliste**  
+Die Komponente `DessertsList.js` bekommt die Daten aus `dessertsData.js` übergeben und zeigt eine scrollbare Dessert-Liste (Karussell) an.  
+- Die Liste erlaubt Filter nach Chakra, Saison und Sortierung nach Kalorien oder Namen.  
+- Die Daten sind in `dessertsData.js` hinterlegt (Beispieleinträge wie „Tiramisu“, „Brownies“ etc.).  
 
-### `npm run build`
+### 3. **Reservierungsformular**  
+In `App.js` findet sich eine einfache Formularsektion, in der Nutzer ihren Namen, ihre E-Mail-Adresse und ein Wunschdatum angeben können.  
+- Ein Klick auf den Button schickt die Daten hypothetisch ab.  
+- Dieses Beispiel dient vor allem der Demonstration eines Formulars in React.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 4. **Registrierungsformular** (`Registrierungsformular.js`)  
+- Hier wird eine kleine Validierung demonstriert (z. B. E-Mail-Format, Passwortlänge).  
+- Man kann Vor- und Nachname, E-Mail, Passwort und Rolle eingeben.  
+- Ein Klick auf „Registrieren“ zeigt an, ob die Eingaben valide sind.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation und Start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Projekt herunterladen** oder klonen.  
+2. **Abhängigkeiten installieren**:  
+   ```bash
+   npm install
+   ```
+3. **Entwicklungsserver starten**:  
+   ```bash
+   npm start
+   ```
+   Anschließend ist die App über [http://localhost:3000](http://localhost:3000) erreichbar.
 
-### `npm run eject`
+### Weitere Scripts
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **`npm test`**  
+  Startet den Test Runner im Watch Mode.
+- **`npm run build`**  
+  Erstellt ein für die Produktion optimiertes Build im Ordner `build`.  
+- **`npm run eject`**  
+  Löst die Abhängigkeit von Create React App auf und gibt alle Konfigurationsdateien frei. (Achtung: Vorgang kann nicht rückgängig gemacht werden.)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologie-Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [React](https://reactjs.org/) (Create React App)  
+- Einfaches HTML/CSS  
+- JavaScript ES6+
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Nützliche Links
 
-## Learn More
+- [Create React App – Dokumentation](https://create-react-app.dev/docs/getting-started/)  
+- [React – Offizielle Dokumentation](https://react.dev/)  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Viel Spaß beim Erkunden des **Little Desserts Restaurant**-Projekts!

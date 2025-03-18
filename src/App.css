@@ -1,86 +1,144 @@
 :root {
-  --background-color: #F7EDE2;  /* Sanftes Cremeweiß */
-  --text-color: #84A59D;        /* Salbeigrün für Texte */
-  --box-color: #F5CAC3;         /* Zartrosa für Form-Hintergrund */
-  --button-color: #F28482;      /* Korallenrot für Buttons */
-  --hover-color: #F6BD60;       /* Hellgelb für Hover */
-  --error-color: #F28482;       /* Fehlerfarbe */
-  --input-bg-color: #F7EDE2;    /* Hintergrund der Eingabefelder */
-  --disabled-button: #D9BBA9;   /* Deaktivierter Button */
-  --disabled-text: #403C01;     /* Textfarbe für deaktivierten Button */
-  --carousel-bg: #F5CAC3;       /* Hintergrund für Karussell */
-  --card-bg: #F7EDE2;           /* Hintergrund der Dessert-Karten */
-  --card-text: #403C01;         /* Textfarbe für Karten */
-  --scrollbar-track: #F7EDE2;   /* Scrollbar-Hintergrund */
-  --scrollbar-thumb: #F28482;   /* Scrollbar-Farbe */
+  /* Farbvariablen */
+  --background-color: #F7EDE2;
+  --text-color: #84A59D;
+  --box-color: #F5CAC3;
+  --button-color: #F28482;
+  --hover-color: #F6BD60;
+  --error-color: #F28482;
+  --input-bg-color: #F7EDE2;
+  --disabled-button: #D9BBA9;
+  --disabled-text: #403C01;
+  --carousel-bg: #F5CAC3;
+  --card-bg: #F7EDE2;
+  --card-text: #403C01;
+  --scrollbar-track: #F7EDE2;
+  --scrollbar-thumb: #F28482;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  /* Hintergrund NICHT hier setzen,
+     wenn du es schon in .app.* setzt */
 }
 
-body {
+.app.light {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Arial', sans-serif;
 }
 
-/* 🍰 DESSERT-KARUSSELL DESIGN */
-.dessert-section {
+.app.dark {
+  background-color: #2D2D2D;
+  color: #F7EDE2;
+}
+
+
+/* Header / Navigation */
+.header {
+  background-color: var(--button-color);
+  padding: 20px 0;
   text-align: center;
-  padding: 40px;
-  background-color: var(--carousel-bg);
-  color: var(--text-color);
+  color: #fff;
 }
 
-.dessert-section h2 {
+.header h1 {
+  margin: 0;
   font-size: 2rem;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin: 15px 0 0;
+  padding: 0;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: var(--hover-color);
+  color: var(--disabled-text);
+}
+
+/* Hauptbereich */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+}
+
+.section {
+  margin: 40px 0;
+}
+
+/* Hero-Bereich */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--box-color);
+  border-radius: 10px;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.1rem;
   margin-bottom: 20px;
 }
 
-/* Karussell-Container */
+.cta-button {
+  background-color: var(--button-color);
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--hover-color);
+  color: var(--disabled-text);
+}
+
+/* Dessert-Bereich / Karussell */
+.dessert-section h2 {
+  margin-bottom: 10px;
+}
+
+.dessert-section p {
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
 .dessert-carousel {
   display: flex;
   overflow-x: auto;
   gap: 15px;
-  padding: 20px;
+  padding: 15px;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
-/* Dessert-Karten */
-.dessert-card {
-  flex: 0 0 auto;
-  width: 250px;
-  background: var(--card-bg);
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  scroll-snap-align: start;
-  transition: transform 0.3s ease-in-out;
-}
-
-.dessert-card:hover {
-  transform: scale(1.05);
-}
-
-.dessert-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: var(--text-color);
-}
-
-.dessert-card p {
-  font-size: 1rem;
-  margin: 5px 0;
-  color: var(--card-text);
-}
-
-.dessert-card strong {
-  color: var(--hover-color);
-}
-
-/* Scrollbar für das Karussell */
 .dessert-carousel::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
 }
 
 .dessert-carousel::-webkit-scrollbar-track {
@@ -88,25 +146,93 @@ body {
 }
 
 .dessert-carousel::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
+  background-color: var(--scrollbar-thumb);
   border-radius: 10px;
 }
 
-/* 📜 REGISTRIERUNGS-FORMULAR */
-.registrierungs-formular {
-  width: 50%;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: var(--box-color); /* Weiches Zartrosa */
+.dessert-card {
+  flex: 0 0 220px;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
+}
+
+.dessert-card:hover {
+  transform: scale(1.03);
+}
+
+.dessert-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.dessert-card p {
+  font-size: 0.95rem;
+  color: var(--card-text);
+}
+
+.keine-treffer {
+  font-size: 1.1rem;
+  color: var(--disabled-text);
+  margin-top: 20px;
+}
+
+/* Reservierung */
+section#reservieren .form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+section#reservieren label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+section#reservieren input[type="text"],
+section#reservieren input[type="email"],
+section#reservieren input[type="date"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+
+section#reservieren button[type="submit"] {
+  background-color: var(--button-color);
+  color: #fff;
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+section#reservieren button[type="submit"]:hover {
+  background-color: var(--hover-color);
+  color: var(--disabled-text);
+}
+
+/* Registrierungsformular */
+.registrierungs-formular {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: var(--box-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .registrierungs-formular h2 {
+  text-align: center;
   margin-bottom: 20px;
-  font-size: 2rem;
-  color: var(--text-color);
 }
 
 form {
@@ -118,41 +244,43 @@ form {
 .field {
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
 label {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
-  color: var(--text-color);
+  margin-bottom: 5px;
 }
 
 input, select {
-  padding: 12px;
+  padding: 10px;
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid var(--text-color);
-  background: var(--input-bg-color);
+  background-color: var(--input-bg-color);
   color: var(--text-color);
 }
 
-input:focus, select:focus {
-  outline: 2px solid var(--hover-color);
+.error-message {
+  color: var(--error-color);
+  font-size: 0.9rem;
+  margin: 5px 0 0;
 }
 
 button {
   background-color: var(--button-color);
   color: white;
   padding: 12px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease;
 }
 
 button:hover {
   background-color: var(--hover-color);
+  color: var(--disabled-text);
 }
 
 button:disabled {
@@ -161,20 +289,35 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.error-message {
-  color: var(--error-color);
-  font-size: 1rem;
-  margin-top: -10px;
+/* Footer */
+.footer {
+  background-color: var(--button-color);
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.95rem;
 }
 
-/* 📱 RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-  .registrierungs-formular {
-    width: 90%;
+/* Responsives Design: Mobile */
+@media (max-width: 600px) {
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .dessert-carousel {
+    gap: 10px;
+  }
+
+  .dessert-card {
+    flex: 0 0 180px;
+    padding: 10px;
   }
   
-  .dessert-card {
-    width: 200px;
-    padding: 10px;
+  .registrierungs-formular {
+    padding: 15px;
+  }
+
+  form {
+    gap: 10px;
   }
 }

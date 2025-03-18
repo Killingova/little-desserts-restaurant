@@ -1,15 +1,14 @@
+// ThemeContext.js
 import React, { createContext, useContext, useState } from "react";
 
-// 1. Erstelle den Kontext
 const ThemeContext = createContext(undefined);
 
-// 2. Erstelle den ThemeProvider, der den Kontext bereitstellt
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light"); // Standardwert: "light"
+  const [theme, setTheme] = useState("light");
 
-  // Funktion, die zwischen "light" und "dark" wechselt
+  // Diese Funktion schaltet zwischen "light" und "dark" um
   const toggleTheme = () => {
-    setTheme((currentTheme) => currentTheme === "light" ? "dark" : "light");
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   return (
@@ -19,5 +18,7 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-// 3. Eigener Hook, um den ThemeContext einfacher zu verwenden
-export const useTheme = () => useContext(ThemeContext);
+// Benutzerdefinierter Hook, um ThemeContext zu verwenden
+export const useTheme = () => {
+  return useContext(ThemeContext);
+};
