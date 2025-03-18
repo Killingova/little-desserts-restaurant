@@ -4,6 +4,7 @@ import { useTheme } from "./ThemeContext";  // <-- neu
 import ThemeSwitch from "./Switch"; // oder genauer Pfad, falls anders benannt
 import DessertsList from "./DessertsList";
 import dessertsData from "./dessertsData";
+import Reservierungsformular from "./Reservierungsformular";
 import Registrierungsformular from "./Registrierungsformular";
 import "./App.css";
 
@@ -55,21 +56,10 @@ function App() {
           <DessertsList data={dessertsData} />
         </section>
 
-        {/* Reservierung */}
+        {/* Reservierung (jetzt via eigener Komponente) */}
         <section id="reservieren" className="section">
           <h2>Reservierung</h2>
-          <form className="form">
-            <label>Name:</label>
-            <input type="text" placeholder="Dein Name" required />
-
-            <label>E-Mail:</label>
-            <input type="email" placeholder="Deine E-Mail" required />
-
-            <label>Datum:</label>
-            <input type="date" required />
-
-            <button type="submit">Jetzt reservieren</button>
-          </form>
+          <Reservierungsformular />
         </section>
 
         {/* Registrierung */}
