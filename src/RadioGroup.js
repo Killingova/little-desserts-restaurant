@@ -1,26 +1,36 @@
-import React from "react";
+import React, { useCallback } from "react";
 
-export const RadioGroup = ({ onChange, selected, children }) => {
-  const RadioOptions = React.Children.map(children, (child) =>
-    React.cloneElement(child, {
-      onChange,
-      checked: child.props.value === selected,
-    })
+export const RadioGroup = ({ name, selected, onChange, children }) => {
+  const handleChange = useCallback(
+    (value) => {
+      onChange(value);
+    },
+    [onChange]
   );
 
-  return <div className="RadioGroup">{RadioOptions}</div>;
+  return (
+    <div className="RadioGroup">
+      {React.Children.map(children, (child) =>
+        React.cloneElement(child, {
+          checked: child.props.value === selected,
+          onChange: () => handleChange(child.props.value),
+          name, // Hier wird das `name`-Attribut an alle RadioOptionen weitergegeben
+        })
+      )}
+    </div>
+  );
 };
 
-export const RadioOption = ({ value, checked, onChange, children }) => {
+export const RadioOption = ({ value, checked, onChange, name, children }) => {
   return (
     <div className="RadioOption">
       <input
         id={value}
         type="radio"
-        name="empfehlung"
+        name={name} // Jetzt dynamisch durch `RadioGroup` gesetzt
         value={value}
         checked={checked}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
       />
       <label htmlFor={value}>{children}</label>
     </div>

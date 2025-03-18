@@ -1,49 +1,61 @@
 import React, { useState } from "react";
-import { RadioGroup, RadioOption } from "./RadioGroup"; // Import der neuen Komponente
+import { RadioGroup, RadioOption } from "./RadioGroup"; 
 
 export default function Reservierungsformular() {
-  // State für Reservierung inklusive Empfehlungsquelle
   const [reservation, setReservation] = useState({
     name: "",
     email: "",
     datum: "",
-    empfehlung: "social_media", // Standardwert
+    empfehlung: "",
   });
 
-  // Formular-Validierung
+  const [errors, setErrors] = useState({
+    email: false,
+  });
+
   const isFormValid = () => {
     return (
       reservation.name.trim() !== "" &&
-      reservation.email.includes("@") &&
+      reservation.email.includes("@") && // Email muss gültig sein
       reservation.datum !== "" &&
       reservation.empfehlung !== ""
     );
   };
 
-  // Formular absenden
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Prüfen, ob die E-Mail gültig ist
+    if (!reservation.email.includes("@")) {
+      setErrors((prev) => ({ ...prev, email: true }));
+      return;
+    } else {
+      setErrors((prev) => ({ ...prev, email: false }));
+    }
+
     if (isFormValid()) {
       alert(
         `Reservierung für ${reservation.name} am ${reservation.datum} erfolgreich!\nEmpfehlung: ${reservation.empfehlung}`
       );
-      setReservation({ name: "", email: "", datum: "", empfehlung: "social_media" });
+      setReservation({ name: "", email: "", datum: "", empfehlung: "" });
     }
   };
 
-  // Generischer Input-Handler
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setReservation((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setReservation((prev) => ({ ...prev, [name]: value }));
+
+    // Fehler zurücksetzen, wenn der User das Feld ändert
+    if (name === "email" && value.includes("@")) {
+      setErrors((prev) => ({ ...prev, email: false }));
+    }
   };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <label>Name:</label>
+      <label htmlFor="name">Name:</label>
       <input
+        id="name"
         type="text"
         name="name"
         value={reservation.name}
@@ -52,8 +64,9 @@ export default function Reservierungsformular() {
         required
       />
 
-      <label>E-Mail:</label>
+      <label htmlFor="email">E-Mail:</label>
       <input
+        id="email"
         type="email"
         name="email"
         value={reservation.email}
@@ -61,9 +74,12 @@ export default function Reservierungsformular() {
         placeholder="Deine E-Mail"
         required
       />
+      {/* Fehlermeldung anzeigen, wenn die E-Mail ungültig ist */}
+      {errors.email && <p role="alert" className="error">Bitte eine gültige E-Mail-Adresse eingeben</p>}
 
-      <label>Datum:</label>
+      <label htmlFor="datum">Datum:</label>
       <input
+        id="datum"
         type="date"
         name="datum"
         value={reservation.datum}
@@ -71,9 +87,9 @@ export default function Reservierungsformular() {
         required
       />
 
-      {/* Neue Empfehlungs-Auswahl */}
       <label>Wie hast du von uns erfahren?</label>
       <RadioGroup
+        name="empfehlung"
         selected={reservation.empfehlung}
         onChange={(value) => setReservation((prev) => ({ ...prev, empfehlung: value }))}
       >

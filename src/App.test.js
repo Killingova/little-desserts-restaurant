@@ -1,8 +1,15 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom"; // Korrekte Import-Variante für neuere Versionen
 
-test('renders learn react link', () => {
+import App from "./App"; // App erst nach dem Mock importieren
+
+// Mock `useTheme` VOR dem Import von `App`
+jest.mock("./ThemeContext", () => ({
+  useTheme: () => ({ theme: "light" }) // Mock für ThemeContext
+}));
+
+test("rendert die App mit dem Titel 'Little Desserts Restaurant'", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = screen.getByText(/Little Desserts Restaurant/i);
+  expect(titleElement).toBeInTheDocument();
 });

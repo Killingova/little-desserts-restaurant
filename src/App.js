@@ -4,8 +4,8 @@ import { useTheme } from "./ThemeContext";  // <-- neu
 import ThemeSwitch from "./Switch"; // oder genauer Pfad, falls anders benannt
 import DessertsList from "./DessertsList";
 import dessertsData from "./dessertsData";
-import Reservierungsformular from "./Reservierungsformular";
-import Registrierungsformular from "./Registrierungsformular";
+import Reservierungsformular from "./Reservierungsformular.js";
+import Registrierungsformular from "./Registrierungsformular.js";
 import MagicMouseTrail from "./MagicMouseTrail";
 
 import "./App.css";
