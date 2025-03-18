@@ -13,30 +13,34 @@ const PasswordErrorMessage = ({ isVisible }) => {
 };
 
 const Registrierungsformular = () => {
-  // ✅ Definierung des State für alle Eingaben
-  const [vorname, setVorname] = useState("");
-  const [nachname, setNachname] = useState("");
-  const [email, setEmail] = useState("");
-  const [passwort, setPasswort] = useState({ value: "", isTouched: false });
-  const [rolle, setRolle] = useState("role");
+  // ✅ Alle Felder in EINEM Objekt
+  const [formData, setFormData] = useState({
+    vorname: "",
+    nachname: "",
+    email: "",
+    passwort: { value: "", isTouched: false },
+    rolle: "role"
+  });
 
   // ✅ Validierung des gesamten Formulars
   const getIsFormValid = () => {
     return (
-      vorname.trim() !== "" &&
-      validateEmail(email) &&
-      passwort.value.length >= 8 &&
-      rolle !== "role"
+      formData.vorname.trim() !== "" &&
+      validateEmail(formData.email) &&
+      formData.passwort.value.length >= 8 &&
+      formData.rolle !== "role"
     );
   };
 
   // ✅ Formular zurücksetzen
   const clearForm = () => {
-    setVorname("");
-    setNachname("");
-    setEmail("");
-    setPasswort({ value: "", isTouched: false });
-    setRolle("role");
+    setFormData({
+      vorname: "",
+      nachname: "",
+      email: "",
+      passwort: { value: "", isTouched: false },
+      rolle: "role"
+    });
   };
 
   // ✅ Formular absenden
@@ -48,17 +52,58 @@ const Registrierungsformular = () => {
     }
   };
 
+  // ✅ Generische onChange für Textfelder (vorname, nachname, email etc.)
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,        // Nur das entsprechende Feld überschreiben
+    }));
+  };
+
+  // Spezielles Handling für Passwort, weil wir dort (value, isTouched) haben
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      passwort: {
+        ...prev.passwort,
+        value: value,
+      },
+    }));
+  };
+
+  const handlePasswordBlur = () => {
+    setFormData((prev) => ({
+      ...prev,
+      passwort: {
+        ...prev.passwort,
+        isTouched: true,
+      },
+    }));
+  };
+
+  // Spezielles Handling für Rolle (Select-Box)
+  const handleRolleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      rolle: e.target.value,
+    }));
+  };
+
   return (
     <section className="registrierungs-formular">
-      <h2>Registrieren bei Little Lemon 🍋</h2>
+      <h2>Registrieren bei Little Desserts</h2>
       <form onSubmit={handleSubmit}>
+
         {/* Vorname */}
         <div className="field">
           <label>Vorname <sup>*</sup></label>
           <input
             type="text"
-            value={vorname}
-            onChange={(e) => setVorname(e.target.value)}
+            name="vorname"
+            value={formData.vorname}
+            onChange={handleInputChange}
             placeholder="Max"
             required
           />
@@ -69,8 +114,9 @@ const Registrierungsformular = () => {
           <label>Nachname</label>
           <input
             type="text"
-            value={nachname}
-            onChange={(e) => setNachname(e.target.value)}
+            name="nachname"
+            value={formData.nachname}
+            onChange={handleInputChange}
             placeholder="Mustermann"
           />
         </div>
@@ -80,8 +126,9 @@ const Registrierungsformular = () => {
           <label>E-Mail <sup>*</sup></label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="beispiel@email.com"
             required
           />
@@ -92,19 +139,27 @@ const Registrierungsformular = () => {
           <label>Passwort <sup>*</sup></label>
           <input
             type="password"
-            value={passwort.value}
-            onChange={(e) => setPasswort({ ...passwort, value: e.target.value })}
-            onBlur={() => setPasswort({ ...passwort, isTouched: true })}
+            name="passwort" // (optional; wir lesen aber OnChange separat)
+            value={formData.passwort.value}
+            onChange={handlePasswordChange}
+            onBlur={handlePasswordBlur}
             placeholder="Mindestens 8 Zeichen"
             required
           />
-          <PasswordErrorMessage isVisible={passwort.isTouched && passwort.value.length < 8} />
+          <PasswordErrorMessage
+            isVisible={formData.passwort.isTouched && formData.passwort.value.length < 8}
+          />
         </div>
 
         {/* Rolle auswählen */}
         <div className="field">
           <label>Rolle <sup>*</sup></label>
-          <select value={rolle} onChange={(e) => setRolle(e.target.value)} required>
+          <select
+            name="rolle"
+            value={formData.rolle}
+            onChange={handleRolleChange}
+            required
+          >
             <option value="role">Bitte wählen...</option>
             <option value="individual">Einzelperson</option>
             <option value="business">Geschäftskunde</option>

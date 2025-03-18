@@ -155,6 +155,9 @@ body {
   background: var(--card-bg);
   border-radius: 10px;
   padding: 15px;
+  /* Hier der neue Rahmen in F28482 */
+  border: 2px solid #F28482;
+  
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   scroll-snap-align: start;
   transition: transform 0.3s ease;
@@ -173,6 +176,7 @@ body {
   font-size: 0.95rem;
   color: var(--card-text);
 }
+
 
 .keine-treffer {
   font-size: 1.1rem;

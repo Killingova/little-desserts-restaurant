@@ -52,7 +52,6 @@ function App() {
 
         {/* Dessert-Karussell */}
         <section id="desserts" className="section">
-          <h2>Unsere Dessert-Kreationen</h2>
           <DessertsList data={dessertsData} />
         </section>
 
